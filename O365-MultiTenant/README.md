@@ -41,4 +41,4 @@ app.UseOpenIdConnectAuthentication(
 
 **Azure Management portál**
 
-![](Images\ad-multitenant.png)
+![](Images/ad-multitenant.png)
