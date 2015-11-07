@@ -1,7 +1,23 @@
 Office - Feature Detection
 ===
 
-Detekce, zda add-in běží v aplikaci Office.
+Detekce, zda add-in běží v aplikaci Office a selektivní načtení Office.js:
+
+```javascript
+<script>
+    if (typeof Office !== "undefined") {
+        var head = document.getElementsByTagName('head')[0];
+        var js = document.createElement("script");
+
+        js.type = "text/javascript";
+        js.src = "https://appsforoffice.microsoft.com/lib/1/hosted/office.js";
+
+        head.appendChild(js);
+    }
+</script>
+```
+
+Detekce podpory konkrétní feature:
 
 ```javascript
 if (Office.context.requirements.isSetSupported("Settings", 1.1)) {
