@@ -3,19 +3,15 @@ Office - Feature Detection
 
 Detekce, zda add-in běží v aplikaci Office a selektivní načtení Office.js:
 
-```javascript
-<script>
-    if (typeof Office !== "undefined") {
-        var head = document.getElementsByTagName('head')[0];
-        var js = document.createElement("script");
-
-        js.type = "text/javascript";
-        js.src = "https://appsforoffice.microsoft.com/lib/1/hosted/office.js";
-
-        head.appendChild(js);
-    }
-</script>
 ```
+@if (Request.QueryString.GetValues("_host_info") != null)
+{
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script src="~/Scripts/ExcelApp.js" type="text/javascript"></script>
+}
+```
+
+**_host_info** obsahuje informaci o typu klienta, kde aplikace běží, např. *_host_Info=Excel|Web|16.00|en-US|ed67539d-0516-3a3c-103d-1788ee84ce81*
 
 Detekce podpory konkrétní feature:
 
