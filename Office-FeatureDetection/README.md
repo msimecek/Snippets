@@ -13,6 +13,30 @@ Detekce, zda add-in běží v aplikaci Office a selektivní načtení Office.js:
 
 **_host_info** obsahuje informaci o typu klienta, kde aplikace běží, např. *_host_Info=Excel|Web|16.00|en-US|ed67539d-0516-3a3c-103d-1788ee84ce81*
 
+Pro rozpad na hodnoty můžeme použít šikovnou funkci:
+
+```javascript
+function getHostInfo() {
+    var hostInfoValue = sessionStorage.getItem('hostInfoValue');
+ 
+    // Parse the value string (reference: office.debug.js)
+    var items = hostInfoValue.split('$');
+    if (!items[2]) {
+        items = hostInfoValue.split('|');
+    }
+ 
+    var hostInfo = {
+        type: items[0],
+        platform: items[1],
+        version: items[2],
+        //culture: items[3] // Some platforms (i.e. Win32) returns a culture property
+    }
+    return hostInfo;
+}
+```
+
+> Autorem je Simon Jaeger: http://simonjaeger.com/where-am-i-detecting-the-office-host-in-office-add-ins/
+
 Detekce podpory konkrétní feature:
 
 ```javascript
